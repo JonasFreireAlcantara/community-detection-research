@@ -2,15 +2,13 @@ from networkx.algorithms.community import label_propagation_communities, greedy_
 from networkx.algorithms.community import asyn_fluidc
 from networkx.generators import social
 
-from library import graph_generator
-from library import community_detection
-from library import metrics
-from library import plot
+from classical_algorithms.common import graph_generator, algorithm_applicator
+from visualization.modes import plot_pyvis
 
 
 def modularity_graph(graph_nx, algorithm, **kwargs):
-    graph_nx, communities = community_detection.apply_algorithm_to_graph(graph_nx, algorithm, **kwargs)
-    modularity = metrics.compute_modularity(graph_nx, communities)
+    graph_nx, communities = algorithm_applicator.apply_algorithm_to_graph(graph_nx, algorithm, **kwargs)
+    modularity = modularity.compute_modularity(graph_nx, communities)
     return graph_nx, modularity
 
 
@@ -37,7 +35,7 @@ def print_modularities(graph_modularities, labels):
 
 def plot_graphs(graph_modularities, labels):
     for ((graph, modularity), label) in zip(graph_modularities, labels):
-        plot.plot_pyvis_graph(graph, output_filename=f'{label}.html', barnes_hut=True, panel=True)
+        plot_pyvis.plot_pyvis_graph(graph, output_filename=f'{label}.html', barnes_hut=True, panel=True)
 
 
 if __name__ == '__main__':
