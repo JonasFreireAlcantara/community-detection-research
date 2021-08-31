@@ -18,5 +18,3 @@ if __name__ == '__main__':
 
     lpa = LabelPropagationAlgorithm()
     communities = lpa.detect_community(got_network)
-
-    print(communities)
