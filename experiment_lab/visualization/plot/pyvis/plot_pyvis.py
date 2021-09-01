@@ -1,7 +1,7 @@
 from pyvis.network import Network
 
 
-def plot_pyvis_graph(
+def plot_graph(
         graph_nx,
         panel=False,
         output_filename='view_graph.html',
@@ -17,5 +17,4 @@ def plot_pyvis_graph(
     network.from_nx(graph_nx)
     if panel:
         network.show_buttons(filter_=['physics'])
-    network.show_buttons(filter_=['edges'])
     network.show(output_filename)

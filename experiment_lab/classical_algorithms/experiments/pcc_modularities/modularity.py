@@ -3,7 +3,7 @@ from networkx.algorithms.community import asyn_fluidc
 from networkx.generators import social
 
 from classical_algorithms.common import graph_generator, algorithm_applicator
-from visualization.modes import plot_pyvis
+from visualization.plot.pyvis import plot_pyvis
 
 
 def modularity_graph(graph_nx, algorithm, **kwargs):
@@ -35,7 +35,7 @@ def print_modularities(graph_modularities, labels):
 
 def plot_graphs(graph_modularities, labels):
     for ((graph, modularity), label) in zip(graph_modularities, labels):
-        plot_pyvis.plot_pyvis_graph(graph, output_filename=f'{label}.html', barnes_hut=True, panel=True)
+        plot_pyvis.plot_graph(graph, output_filename=f'{label}.html', barnes_hut=True, panel=True)
 
 
 if __name__ == '__main__':
