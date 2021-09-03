@@ -39,4 +39,3 @@ class FoliumBuilder:
             zoom_start=zoom_level,
             tiles="CartoDB dark_matter",
         )
-

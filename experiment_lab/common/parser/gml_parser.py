@@ -7,7 +7,7 @@ from common.log.logger import get_logger
 class GMLParser(Parser):
 
     def __init__(self, gml_path):
-        super(Parser, self).__init__(gml_path)
+        super().__init__(gml_path)
         self.logger = get_logger()
 
     def prepare_object(self, obj):
