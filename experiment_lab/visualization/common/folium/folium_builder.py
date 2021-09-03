@@ -1,8 +1,7 @@
 import folium
 import numpy
-import numpy as np
 
-from common.constants import graphs_constants
+from common.constants.graphs_constants import GraphsConstants
 
 
 class FoliumBuilder:
@@ -12,8 +11,8 @@ class FoliumBuilder:
 
     @staticmethod
     def _compute_center_position(graph):
-        lat = numpy.average(FoliumBuilder._get_min_max_value_of_attribute(graph, graphs_constants.LATITUDE))
-        lon = numpy.average(FoliumBuilder._get_min_max_value_of_attribute(graph, graphs_constants.LONGITUDE))
+        lat = numpy.average(FoliumBuilder._get_min_max_value_of_attribute(graph, GraphsConstants.LATITUDE))
+        lon = numpy.average(FoliumBuilder._get_min_max_value_of_attribute(graph, GraphsConstants.LONGITUDE))
         return lat, lon
 
     @staticmethod
@@ -23,8 +22,8 @@ class FoliumBuilder:
 
     @staticmethod
     def _compute_zoom_level(graph):
-        min_lat, _ = FoliumBuilder._get_min_max_value_of_attribute(graph, graphs_constants.LATITUDE)
-        min_lon, _ = FoliumBuilder._get_min_max_value_of_attribute(graph, graphs_constants.LONGITUDE)
+        min_lat, _ = FoliumBuilder._get_min_max_value_of_attribute(graph, GraphsConstants.LATITUDE)
+        min_lon, _ = FoliumBuilder._get_min_max_value_of_attribute(graph, GraphsConstants.LONGITUDE)
         center_lat, center_lon = FoliumBuilder._compute_center_position(graph)
 
         greater_distance = max((center_lat - min_lat), (center_lon - min_lon))
@@ -38,5 +37,6 @@ class FoliumBuilder:
         return folium.Map(
             location=center_position,
             zoom_start=zoom_level,
+            tiles="CartoDB dark_matter",
         )
 

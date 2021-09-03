@@ -1,6 +1,8 @@
 # Node field's constants
-COUNTRY = 'Country'
-ID = 'id'
-LABEL = 'label'
-LATITUDE = 'Latitude'
-LONGITUDE = 'Longitude'
+class GraphsConstants:
+    COUNTRY = 'Country'
+    ID = 'id'
+    LABEL = 'label'
+    LATITUDE = 'Latitude'
+    LONGITUDE = 'Longitude'
+    COMMUNITY = 'Community'

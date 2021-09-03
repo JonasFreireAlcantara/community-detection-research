@@ -1,7 +1,7 @@
 from networkx.algorithms.community import label_propagation_communities
 
 from classical_algorithms.common import graph_generator
-from classical_algorithms.common import ClassicalAlgorithm
+from classical_algorithms.algorithms.classical_algorithm import ClassicalAlgorithm
 
 
 class LabelPropagationAlgorithm(ClassicalAlgorithm):

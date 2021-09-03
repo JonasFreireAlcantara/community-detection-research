@@ -4,3 +4,4 @@ pandas
 karateclub
 networkx
 folium
+colour
