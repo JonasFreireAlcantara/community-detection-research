@@ -11,7 +11,7 @@ from visualization.utils.folium.folium_utils import FoliumUtils
 
 
 if __name__ == '__main__':
-    g_path = os.path.join(resources_constants.TOPOLOGIES_PATH, 'cpAbvt.gml')
+    g_path = os.path.join(resources_constants.TOPOLOGIES_PATH, 'Abilene.gml')
 
     gml_parser = GMLParser(g_path)
     g = gml_parser.parse()
