@@ -1,4 +1,8 @@
 graph [
+  multigraph 1
+  multigraph 1
+  multigraph 1
+  multigraph 1
   DateObtained "20/10/10"
   GeoLocation "Bulgaria"
   GeoExtent "Country"

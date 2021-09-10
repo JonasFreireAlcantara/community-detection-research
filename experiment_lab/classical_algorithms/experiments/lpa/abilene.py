@@ -2,18 +2,18 @@ import os
 
 from common.utils.node_utils import NodeUtils
 from classical_algorithms.algorithms.label_propagation import LabelPropagationAlgorithm
-from common.constants import resources_constants
 from common.constants.graphs_constants import GraphsConstants
-from common.parser.gml_parser import GMLParser
+from common.constants.resources_constants import ResourcesConstants
+from common.loader.gml_loader import GMLLoader
 from visualization.plot.folium.folium_plot import FoliumPlot
 from visualization.common.folium.folium_builder import FoliumBuilder
 from visualization.utils.folium.folium_utils import FoliumUtils
 
 
 if __name__ == '__main__':
-    g_path = os.path.join(resources_constants.TOPOLOGIES_PATH, 'Abilene.gml')
+    g_path = os.path.join(ResourcesConstants.TOPOLOGIES_PATH, 'Abilene.gml')
 
-    gml_parser = GMLParser(g_path)
+    gml_parser = GMLLoader(g_path)
     g = gml_parser.parse()
 
     NodeUtils.multiply_all_nodes_attribute_value_by_factor(g, GraphsConstants.LONGITUDE, 1)

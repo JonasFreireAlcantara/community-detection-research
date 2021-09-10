@@ -1,4 +1,8 @@
 graph [
+  multigraph 1
+  multigraph 1
+  multigraph 1
+  multigraph 1
   DateObtained "24/10/10"
   GeoLocation "Iowa, USA"
   GeoExtent "Region"

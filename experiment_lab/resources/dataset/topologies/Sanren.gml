@@ -1,4 +1,8 @@
 graph [
+  multigraph 1
+  multigraph 1
+  multigraph 1
+  multigraph 1
   DateObtained "3/02/11"
   GeoLocation "South Africa"
   GeoExtent "Country"

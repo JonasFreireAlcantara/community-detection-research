@@ -1,4 +1,8 @@
 graph [
+  multigraph 1
+  multigraph 1
+  multigraph 1
+  multigraph 1
   DateObtained "24/01/11"
   GeoLocation "Central South, UK"
   GeoExtent "Region"

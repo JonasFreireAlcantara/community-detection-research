@@ -1,4 +1,8 @@
 graph [
+  multigraph 1
+  multigraph 1
+  multigraph 1
+  multigraph 1
   DateObtained "31/03/11"
   GeoLocation "US"
   GeoExtent "Country"

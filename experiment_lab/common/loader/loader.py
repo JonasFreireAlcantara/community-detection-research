@@ -1,7 +1,7 @@
 import abc
 
 
-class Parser(abc.ABC):
+class Loader(abc.ABC):
     """Class to represent parsers."""
 
     def __init__(self, object_to_be_parsed):
