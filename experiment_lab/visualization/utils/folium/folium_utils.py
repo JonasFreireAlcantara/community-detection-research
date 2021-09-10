@@ -48,7 +48,7 @@ class FoliumUtils:
     @staticmethod
     def add_edges_to_map(folium_map, graph):
         colors = FoliumUtils._get_range_of_colors(graph)
-        for source, target in graph.edges:
+        for source, target, _ in graph.edges:
             source_node = graph.nodes[source]
             source_point = (source_node[GraphsConstants.LATITUDE], source_node[GraphsConstants.LONGITUDE])
             target_node = graph.nodes[target]
