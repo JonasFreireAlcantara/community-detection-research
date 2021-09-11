@@ -1,8 +1,5 @@
 graph [
   multigraph 1
-  multigraph 1
-  multigraph 1
-  multigraph 1
 multigraph 1
   multigraph 1
   DateObtained "6/11/10"

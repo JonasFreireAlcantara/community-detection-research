@@ -1,8 +1,5 @@
 graph [
   multigraph 1
-  multigraph 1
-  multigraph 1
-  multigraph 1
   DateObtained "20/03/11"
   GeoLocation "Europe"
   GeoExtent "Continent"

@@ -36,7 +36,7 @@ class TopologiesPickerUtils:
 
         networks = list()
         for topology_path in topology_paths:
-            TopologiesPickerUtils._add_attribute_to_gml_file(topology_path, 'multigraph', '1')
+            # TopologiesPickerUtils._add_attribute_to_gml_file(topology_path, 'multigraph', '1')
             network = GMLLoader(topology_path).parse()
             networks.append(network)
 

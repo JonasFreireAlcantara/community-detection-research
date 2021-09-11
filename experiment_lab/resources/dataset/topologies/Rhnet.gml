@@ -1,8 +1,5 @@
 graph [
   multigraph 1
-  multigraph 1
-  multigraph 1
-  multigraph 1
   DateObtained "22/03/11"
   GeoLocation "Iceland"
   GeoExtent "Country"

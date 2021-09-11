@@ -1,8 +1,5 @@
 graph [
   multigraph 1
-  multigraph 1
-  multigraph 1
-  multigraph 1
   DateObtained "14/02/11"
   GeoLocation "Czech Republic"
   GeoExtent "Country"

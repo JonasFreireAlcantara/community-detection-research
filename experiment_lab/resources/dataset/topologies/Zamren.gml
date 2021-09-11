@@ -1,8 +1,5 @@
 graph [
   multigraph 1
-  multigraph 1
-  multigraph 1
-  multigraph 1
   DateObtained "14/07/11"
   GeoLocation "Zambia"
   GeoExtent "Country"

@@ -1,8 +1,5 @@
 graph [
   multigraph 1
-  multigraph 1
-  multigraph 1
-  multigraph 1
   DateObtained "26/10/10"
   GeoLocation "Tennessee, USA"
   GeoExtent "Region"

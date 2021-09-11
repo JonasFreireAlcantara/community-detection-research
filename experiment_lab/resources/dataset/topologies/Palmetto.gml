@@ -1,8 +1,5 @@
 graph [
   multigraph 1
-  multigraph 1
-  multigraph 1
-  multigraph 1
   DateObtained "19/10/10"
   GeoLocation "North Carolina, South Carolina, USA"
   GeoExtent "Region"

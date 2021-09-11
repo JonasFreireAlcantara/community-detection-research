@@ -1,8 +1,5 @@
 graph [
   multigraph 1
-  multigraph 1
-  multigraph 1
-  multigraph 1
   DateObtained "20/07/11"
   GeoLocation "Ireland"
   GeoExtent "Country"

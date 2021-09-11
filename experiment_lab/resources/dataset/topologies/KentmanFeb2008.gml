@@ -1,8 +1,5 @@
 graph [
   multigraph 1
-  multigraph 1
-  multigraph 1
-  multigraph 1
   DateObtained "31/01/11"
   GeoLocation "Kent, UK"
   GeoExtent "Region"

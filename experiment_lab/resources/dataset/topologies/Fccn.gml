@@ -1,8 +1,5 @@
 graph [
   multigraph 1
-  multigraph 1
-  multigraph 1
-  multigraph 1
   DateObtained "19/03/11"
   GeoLocation "Portugal"
   GeoExtent "Country"

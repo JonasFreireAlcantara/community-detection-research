@@ -1,8 +1,5 @@
 graph [
   multigraph 1
-  multigraph 1
-  multigraph 1
-  multigraph 1
   DateObtained "15/11/10"
   GeoLocation "Louisiana, Texas, USA"
   GeoExtent "Region"

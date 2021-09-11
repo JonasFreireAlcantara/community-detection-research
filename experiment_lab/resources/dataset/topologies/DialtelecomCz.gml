@@ -1,8 +1,5 @@
 graph [
   multigraph 1
-  multigraph 1
-  multigraph 1
-  multigraph 1
 multigraph 1
   GeoLocation "Czech Republic"
   GeoExtent "Country"

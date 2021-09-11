@@ -1,8 +1,5 @@
 graph [
   multigraph 1
-  multigraph 1
-  multigraph 1
-  multigraph 1
   DateObtained "21/10/10"
   GeoLocation "Turkey"
   GeoExtent "Country"
