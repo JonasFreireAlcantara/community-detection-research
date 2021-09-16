@@ -3,9 +3,10 @@ import random
 import numpy as np
 
 from common.constants.graphs_constants import GraphsConstants
+from common.log.logger import get_logger
 
 
-class NodeUtils:
+class GraphUtils:
 
     @staticmethod
     def add_all_nodes_attribute(graph, attribute, value):
@@ -19,7 +20,7 @@ class NodeUtils:
     @staticmethod
     def set_all_nodes_attribute_value(graph, attribute, value):
         for node in graph.nodes:
-            NodeUtils._set_node_attribute_value(graph, node, attribute, value)
+            GraphUtils._set_node_attribute_value(graph, node, attribute, value)
 
     @staticmethod
     def _multiply_node_attribute_value_by_factor(graph, node, attribute, factor):
@@ -35,26 +36,34 @@ class NodeUtils:
 
     @staticmethod
     def _find_average_position(graph):
-        return NodeUtils._average_position(graph, graph.nodes)
+        return GraphUtils._average_position(graph, graph.nodes)
 
     @staticmethod
     def _find_average_position_by_adjacent_nodes(graph, node_id):
         neighbors = list(graph.neighbors(node_id))
         try:
-            return NodeUtils._average_position(graph, neighbors)
+            return GraphUtils._average_position(graph, neighbors)
         except ValueError:
-            return NodeUtils._find_average_position(graph)
+            return GraphUtils._find_average_position(graph)
 
     @staticmethod
     def set_position_to_center_when_position_is_absent(graph):
         for label in graph.nodes:
             node = graph.nodes[label]
-            if NodeUtils._has_not_coordinate(node):
-                center_lon, center_lat = NodeUtils._find_average_position_by_adjacent_nodes(graph, label)
+            if GraphUtils._has_not_coordinate(node):
+                center_lon, center_lat = GraphUtils._find_average_position_by_adjacent_nodes(graph, label)
                 center_lon += (random.random() * 2) - 1
                 center_lat += (random.random() * 2) - 1
                 node[GraphsConstants.LONGITUDE] = center_lon
                 node[GraphsConstants.LATITUDE] = center_lat
+
+    @staticmethod
+    def remove_orphaned_nodes(graph):
+        for node_id in graph.nodes:
+            neighbors = graph.neighbors(node_id)
+            if not neighbors:
+                get_logger().info(f'Removing node {node_id} ...')
+                graph.remove_node(node_id)
 
     @staticmethod
     def _has_not_coordinate(node):
@@ -63,13 +72,13 @@ class NodeUtils:
     @staticmethod
     def multiply_all_nodes_attribute_value_by_factor(graph, attribute, factor):
         for node in graph.nodes:
-            NodeUtils._multiply_node_attribute_value_by_factor(graph, node, attribute, factor)
+            GraphUtils._multiply_node_attribute_value_by_factor(graph, node, attribute, factor)
 
     @staticmethod
-    def set_communities_ids(graph, communities):
-        community_id = 0
+    def set_communities_labels(graph, communities):
+        community_label = 0
         for community in communities:
             for label in community:
                 node = graph.nodes[label]
-                node[GraphsConstants.COMMUNITY] = community_id
-            community_id += 1
+                node[GraphsConstants.COMMUNITY] = community_label
+            community_label += 1

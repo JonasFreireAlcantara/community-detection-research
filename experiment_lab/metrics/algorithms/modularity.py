@@ -1,5 +1,10 @@
 from networkx.algorithms import community
 
+from metrics.algorithms.metric import Metric
 
-def compute_modularity(graph_nx, communities):
-    return community.modularity(graph_nx, communities)
+
+class ModularityMetric(Metric):
+
+    @staticmethod
+    def compute(graph, communities):
+        return community.modularity(graph, communities)

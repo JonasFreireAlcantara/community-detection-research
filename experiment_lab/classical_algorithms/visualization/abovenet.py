@@ -1,6 +1,6 @@
 import os
 
-from common.utils.node_utils import NodeUtils
+from common.utils.graph_utils import GraphUtils
 from common.constants import resources_constants
 from common.constants.graphs_constants import GraphsConstants
 from common.loader.gml_loader import GMLLoader
@@ -15,9 +15,9 @@ if __name__ == '__main__':
     gml_parser = GMLLoader(g_path)
     g = gml_parser.parse()
 
-    NodeUtils.multiply_all_nodes_attribute_value_by_factor(g, GraphsConstants.LONGITUDE, 1)
-    NodeUtils.multiply_all_nodes_attribute_value_by_factor(g, GraphsConstants.LATITUDE, 1)
-    NodeUtils.set_all_nodes_attribute_value(g, GraphsConstants.COMMUNITY, 0)
+    GraphUtils.multiply_all_nodes_attribute_value_by_factor(g, GraphsConstants.LONGITUDE, 1)
+    GraphUtils.multiply_all_nodes_attribute_value_by_factor(g, GraphsConstants.LATITUDE, 1)
+    GraphUtils.set_all_nodes_attribute_value(g, GraphsConstants.COMMUNITY, 0)
 
     m = FoliumBuilder.build_folium_map(g, zoom_level=2.5)
     FoliumUtils.add_nodes_to_map(m, g)
