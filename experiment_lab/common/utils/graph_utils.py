@@ -59,11 +59,14 @@ class GraphUtils:
 
     @staticmethod
     def remove_orphaned_nodes(graph):
+        to_be_removed = list()
         for node_id in graph.nodes:
-            neighbors = graph.neighbors(node_id)
+            neighbors = list(graph.neighbors(node_id))
             if not neighbors:
                 get_logger().info(f'Removing node {node_id} ...')
-                graph.remove_node(node_id)
+                to_be_removed.append(node_id)
+        for node_id in to_be_removed:
+            graph.remove_node(node_id)
 
     @staticmethod
     def _has_not_coordinate(node):

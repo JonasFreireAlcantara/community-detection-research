@@ -13,13 +13,20 @@ from visualization.utils.folium.folium_utils import FoliumUtils
 
 class PlatformClassicalRunner:
 
-    def __init__(self, source_path, target_path, algorithm_class, metric_class):
+    def __init__(self, source_path, target_path, algorithm_class, metric_classes):
         self.source_path = source_path
         self.target_path = target_path
         self.algorithm_class = algorithm_class
-        self.metric_class = metric_class
+        self.metric_classes = metric_classes
         self.logger = logger.get_logger()
         self.metrics = list()
+
+    def _compute_metrics(self, graph, communities):
+        results = list()
+        for metric_class in self.metric_classes:
+            result = metric_class.compute(graph, communities)
+            results.append((metric_class.__name__, result))
+        return results
 
     def _apply_algorithm_compute_metric_and_generate_map(self, source, target):
         g = GMLLoader(source).parse()
@@ -29,8 +36,8 @@ class PlatformClassicalRunner:
         algorithm = self.algorithm_class()
         communities = list(algorithm.detect_community(g))
 
-        metric_result = self.metric_class.compute(g, communities)
-        self.metrics.append([g.graph[GraphsConstants.LABEL], metric_result])
+        metrics_result = self._compute_metrics(g, communities)
+        self.metrics.append([g.graph[GraphsConstants.LABEL], metrics_result])
 
         GraphUtils.set_communities_labels(g, communities)
         m = FoliumBuilder.build_folium_map(g, zoom_level=2.5)

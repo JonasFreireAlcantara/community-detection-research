@@ -12,7 +12,22 @@ class MetricWriter(Writer):
         return obj
 
     def write(self):
-        lines = ['Network,Metric']
-        lines.extend([f'{network},{metric}' for network, metric in self.object_ready_to_be_write])
+        lines = [f'Network,{MetricWriter._get_metrics_header(self.object_ready_to_be_write[0])}']
+        lines.extend([
+            f'{network},{MetricWriter._get_metrics_content(metrics)}'
+            for network, metrics in self.object_ready_to_be_write
+        ])
         with open(self.path, 'w') as csv_file:
             csv_file.write('\n'.join(lines))
+
+    @staticmethod
+    def _get_metrics_header(metrics):
+        metrics_name = [metric_name for metric_name, _ in metrics[1]]
+        return ','.join(metrics_name)
+
+    @staticmethod
+    def _get_metrics_content(metrics):
+        metrics_value = [str(metric_value) for _, metric_value in metrics]
+        return ','.join(metrics_value)
+
+
