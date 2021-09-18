@@ -6,4 +6,5 @@ class GraphsConstants:
     LABEL = 'label'
     LATITUDE = 'Latitude'
     LONGITUDE = 'Longitude'
+    MULTIGRAPH = 'multigraph'
     NETWORK = 'Network'

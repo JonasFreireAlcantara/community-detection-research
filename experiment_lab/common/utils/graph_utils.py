@@ -1,5 +1,6 @@
 import random
 
+from networkx import Graph
 import numpy as np
 
 from common.constants.graphs_constants import GraphsConstants
@@ -56,6 +57,7 @@ class GraphUtils:
                 center_lat += (random.random() * 2) - 1
                 node[GraphsConstants.LONGITUDE] = center_lon
                 node[GraphsConstants.LATITUDE] = center_lat
+        return graph
 
     @staticmethod
     def remove_orphaned_nodes(graph):
@@ -67,6 +69,11 @@ class GraphUtils:
                 to_be_removed.append(node_id)
         for node_id in to_be_removed:
             graph.remove_node(node_id)
+        return graph
+
+    @staticmethod
+    def merge_multiple_edges(multigraph):
+        return Graph(multigraph)
 
     @staticmethod
     def _has_not_coordinate(node):

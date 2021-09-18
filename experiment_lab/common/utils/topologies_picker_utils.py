@@ -11,6 +11,8 @@ from common.utils.resources_utils import ResourcesUtils
 
 class TopologiesPickerUtils:
 
+    NODES_MINIMUM_NUMBER = 10
+
     @staticmethod
     def _filter_networks_by_attribute(networks, attribute, values):
         return [network for network in networks if network.graph[attribute] in values]
@@ -23,7 +25,20 @@ class TopologiesPickerUtils:
         ]
 
     @staticmethod
+    def _filter_networks_by_number_nodes(networks):
+        return [network for network in networks if len(network.nodes) > TopologiesPickerUtils.NODES_MINIMUM_NUMBER]
+
+    @staticmethod
+    def _remove_attribute_from_gml_file(gml_path, attribute):
+        with open(gml_path, 'r') as f:
+            lines = f.readlines()
+        lines = [line for line in lines if attribute not in line]
+        with open(gml_path, 'w') as f:
+            f.write(''.join(lines))
+
+    @staticmethod
     def _add_attribute_to_gml_file(gml_path, attribute, value):
+        TopologiesPickerUtils._remove_attribute_from_gml_file(gml_path, attribute)
         with open(gml_path, 'r') as f:
             lines = f.readlines()
         lines.insert(1, f'  {attribute} {value}\n')
@@ -36,12 +51,14 @@ class TopologiesPickerUtils:
 
         networks = list()
         for topology_path in topology_paths:
-            # TopologiesPickerUtils._add_attribute_to_gml_file(topology_path, 'multigraph', '1')
-            network = GMLLoader(topology_path).parse()
-            networks.append(network)
+            TopologiesPickerUtils._add_attribute_to_gml_file(topology_path, 'multigraph', '1')
+            multigraph = GMLLoader(topology_path).parse()
+            networks.append(multigraph)
 
-        networks = TopologiesPickerUtils._filter_networks_by_attribute(networks, attribute, values)
+        if values:
+            networks = TopologiesPickerUtils._filter_networks_by_attribute(networks, attribute, values)
         networks = TopologiesPickerUtils._filter_networks_by_ration_between_node_and_edges(networks)
+        networks = TopologiesPickerUtils._filter_networks_by_number_nodes(networks)
 
         for network in networks:
             gml_writer = GMLWriter(network, path=os.path.join(target_path, f'{network.graph["label"].strip()}.gml'))
@@ -49,8 +66,8 @@ class TopologiesPickerUtils:
 
 
 if __name__ == '__main__':
-    target_path = os.path.join(ResourcesConstants.DATASET_PATH, 'usa_topologies')
+    target_path = os.path.join(ResourcesConstants.DATASET_PATH, 'by_minimum_factor_topologies')
 
     TopologiesPickerUtils.pick_topologies_by_attribute(target_path, 'GeoLocation', [
-        'US', 'USA'
+        # 'US', 'USA'
     ])

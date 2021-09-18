@@ -1,4 +1,6 @@
-from networkx.algorithms.community import label_propagation_communities
+from time import time
+
+from networkx.algorithms.community import label_propagation_communities, asyn_lpa_communities
 
 from classical_algorithms.algorithms.classical_algorithm import ClassicalAlgorithm
 
@@ -6,7 +8,8 @@ from classical_algorithms.algorithms.classical_algorithm import ClassicalAlgorit
 class LabelPropagationAlgorithm(ClassicalAlgorithm):
 
     def __init__(self):
-        super().__init__(LabelPropagationAlgorithm.__name__, label_propagation_communities)
+        super().__init__(LabelPropagationAlgorithm.__name__, asyn_lpa_communities)
+        self.seed = int(time())
 
     def apply(self, graph):
-        return self.algorithm(graph)
+        return self.algorithm(graph, seed=self.seed)

@@ -30,8 +30,9 @@ class PlatformClassicalRunner:
 
     def _apply_algorithm_compute_metric_and_generate_map(self, source, target):
         g = GMLLoader(source).parse()
-        GraphUtils.remove_orphaned_nodes(g)
-        GraphUtils.set_position_to_center_when_position_is_absent(g)
+        g = GraphUtils.merge_multiple_edges(g)
+        g = GraphUtils.remove_orphaned_nodes(g)
+        g = GraphUtils.set_position_to_center_when_position_is_absent(g)
 
         algorithm = self.algorithm_class()
         communities = list(algorithm.detect_community(g))

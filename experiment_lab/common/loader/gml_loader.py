@@ -1,4 +1,4 @@
-from networkx.readwrite import read_gml, write_gml
+from networkx.readwrite import read_gml
 
 from common.loader.loader import Loader
 from common.log.logger import get_logger

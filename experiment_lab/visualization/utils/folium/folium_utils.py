@@ -18,7 +18,7 @@ class FoliumUtils:
     @staticmethod
     def add_node_to_map(folium_map, location, label, hex_color):
         folium.Circle(
-            radius=10000,
+            radius=1000,
             location=location,
             popup=label,
             tooltip=label,
@@ -48,7 +48,7 @@ class FoliumUtils:
     @staticmethod
     def add_edges_to_map(folium_map, graph):
         colors = FoliumUtils._get_range_of_colors(graph)
-        for source, target, _ in graph.edges:
+        for source, target in graph.edges:
             source_node = graph.nodes[source]
             source_point = (source_node[GraphsConstants.LATITUDE], source_node[GraphsConstants.LONGITUDE])
             target_node = graph.nodes[target]
