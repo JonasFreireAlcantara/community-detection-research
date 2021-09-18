@@ -13,10 +13,11 @@ from visualization.utils.folium.folium_utils import FoliumUtils
 
 class PlatformClassicalRunner:
 
-    def __init__(self, source_path, target_path, algorithm_class, metric_classes):
+    def __init__(self, source_path, target_path, algorithm_class, metric_classes, **algorithm_kwargs):
         self.source_path = source_path
         self.target_path = target_path
         self.algorithm_class = algorithm_class
+        self.algorithm_kwargs = algorithm_kwargs
         self.metric_classes = metric_classes
         self.logger = logger.get_logger()
         self.metrics = list()
@@ -33,8 +34,9 @@ class PlatformClassicalRunner:
         g = GraphUtils.merge_multiple_edges(g)
         g = GraphUtils.remove_orphaned_nodes(g)
         g = GraphUtils.set_position_to_center_when_position_is_absent(g)
+        g = GraphUtils.move_position_of_overlapping_nodes(g)
 
-        algorithm = self.algorithm_class()
+        algorithm = self.algorithm_class(**self.algorithm_kwargs)
         communities = list(algorithm.detect_community(g))
 
         metrics_result = self._compute_metrics(g, communities)

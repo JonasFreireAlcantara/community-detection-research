@@ -1,6 +1,6 @@
 from time import time
 
-from networkx.algorithms.community import label_propagation_communities, asyn_lpa_communities
+from networkx.algorithms.community import asyn_lpa_communities
 
 from classical_algorithms.algorithms.classical_algorithm import ClassicalAlgorithm
 

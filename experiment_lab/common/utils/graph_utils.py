@@ -1,3 +1,4 @@
+import time
 import random
 
 from networkx import Graph
@@ -74,6 +75,31 @@ class GraphUtils:
     @staticmethod
     def merge_multiple_edges(multigraph):
         return Graph(multigraph)
+
+    @staticmethod
+    def move_position_of_overlapping_nodes(graph):
+        logger = get_logger()
+        random.seed(time.time())
+        nodes_id = list(graph.nodes)
+        for k in nodes_id:
+            for i in nodes_id:
+                node_k = graph.nodes[k]
+                node_i = graph.nodes[i]
+                if GraphUtils._node_at_same_position(node_k, node_i):
+                    logger.info(f'Moving position of node: {k}')
+                    node_k[GraphsConstants.LONGITUDE] += (random.random() * 1) - 0.5
+                    node_k[GraphsConstants.LATITUDE] += (random.random() * 1) - 0.5
+        return graph
+
+    @staticmethod
+    def _node_at_same_position(node_1, node_2):
+        if node_1 == node_2:
+            return False
+
+        return (
+            node_1[GraphsConstants.LATITUDE] == node_2[GraphsConstants.LATITUDE]
+            and node_1[GraphsConstants.LONGITUDE] == node_2[GraphsConstants.LONGITUDE]
+        )
 
     @staticmethod
     def _has_not_coordinate(node):

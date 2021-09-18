@@ -18,13 +18,13 @@ class FoliumUtils:
     @staticmethod
     def add_node_to_map(folium_map, location, label, hex_color):
         folium.Circle(
-            radius=1000,
+            radius=5,
             location=location,
             popup=label,
             tooltip=label,
             fill=True,
             color=hex_color,
-            fill_opacity=1,
+            fill_opacity=0.3,
         ).add_to(folium_map)
 
     @staticmethod
