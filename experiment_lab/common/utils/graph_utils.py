@@ -66,7 +66,7 @@ class GraphUtils:
         for node_id in graph.nodes:
             neighbors = list(graph.neighbors(node_id))
             if not neighbors:
-                get_logger().info(f'Removing node {node_id} ...')
+                get_logger().info(f'Removing orphan node {node_id} ...')
                 to_be_removed.append(node_id)
         for node_id in to_be_removed:
             graph.remove_node(node_id)

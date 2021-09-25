@@ -29,7 +29,7 @@ class TopologiesPickerUtils:
         return [network for network in networks if len(network.nodes) > TopologiesPickerUtils.NODES_MINIMUM_NUMBER]
 
     @staticmethod
-    def _remove_attribute_from_gml_file(gml_path, attribute):
+    def remove_attribute_from_gml_file(gml_path, attribute):
         with open(gml_path, 'r') as f:
             lines = f.readlines()
         lines = [line for line in lines if attribute not in line]
@@ -37,8 +37,8 @@ class TopologiesPickerUtils:
             f.write(''.join(lines))
 
     @staticmethod
-    def _add_attribute_to_gml_file(gml_path, attribute, value):
-        TopologiesPickerUtils._remove_attribute_from_gml_file(gml_path, attribute)
+    def add_attribute_to_gml_file(gml_path, attribute, value):
+        TopologiesPickerUtils.remove_attribute_from_gml_file(gml_path, attribute)
         with open(gml_path, 'r') as f:
             lines = f.readlines()
         lines.insert(1, f'  {attribute} {value}\n')
@@ -51,7 +51,7 @@ class TopologiesPickerUtils:
 
         networks = list()
         for topology_path in topology_paths:
-            TopologiesPickerUtils._add_attribute_to_gml_file(topology_path, 'multigraph', '1')
+            TopologiesPickerUtils.add_attribute_to_gml_file(topology_path, 'multigraph', '1')
             multigraph = GMLLoader(topology_path).parse()
             networks.append(multigraph)
 
