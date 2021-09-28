@@ -1,14 +1,18 @@
 from networkx.readwrite import read_gml
 from networkx.classes.function import create_empty_copy
 
+from common.constants.graphs_constants import GraphsConstants
 from common.loader.loader import Loader
 from common.log.logger import get_logger
+from common.utils.graph_utils import GraphUtils
 
 
 class JonasSILoader(Loader):
     """Class to load the GML from the Jonas Scientific Initiation dataset output."""
 
     UPPER_TRIANGULAR_POSITION = 15
+    RESILIENCE_ONE_LINK_FAILURE = 30
+    RESILIENCE_TWO_LINKS_FAILURE = 31
 
     def __init__(self, gml_path, line):
         super().__init__(gml_path)
@@ -48,6 +52,7 @@ class JonasSILoader(Loader):
         self.logger.info(f'Starting parse for {self.object_ready_to_be_parsed}')
         graph = read_gml(self.object_ready_to_be_parsed, label='id')
         graph = create_empty_copy(graph)
+        graph = self._get_resilience_and_add_to_graph(graph)
 
         adjacency_matrix = self.create_adjacency_matrix()
         nodes_number = len(adjacency_matrix)
@@ -56,5 +61,11 @@ class JonasSILoader(Loader):
             for target in range(nodes_number):
                 if adjacency_matrix[source][target] == '1':
                     graph.add_edge(source, target)
+        return graph
 
+    def _get_resilience_and_add_to_graph(self, graph):
+        resilience_one_link = self.line.split(';')[JonasSILoader.RESILIENCE_ONE_LINK_FAILURE]
+        resilience_two_links = self.line.split(';')[JonasSILoader.RESILIENCE_TWO_LINKS_FAILURE]
+        graph.graph[GraphsConstants.RESILIENCE_ONE_LINK] = resilience_one_link
+        graph.graph[GraphsConstants.RESILIENCE_TWO_LINK] = resilience_two_links
         return graph

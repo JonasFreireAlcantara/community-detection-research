@@ -23,7 +23,10 @@ class PlatformClassicalRunner:
         self.metrics = list()
 
     def _compute_metrics(self, graph, communities):
-        results = list()
+        results = [
+            (GraphsConstants.RESILIENCE_ONE_LINK, graph.graph.get(GraphsConstants.RESILIENCE_ONE_LINK, '---')),
+            (GraphsConstants.RESILIENCE_TWO_LINK, graph.graph.get(GraphsConstants.RESILIENCE_TWO_LINK, '---'))
+        ]
         for metric_class in self.metric_classes:
             result = metric_class.compute(graph, communities)
             results.append((metric_class.__name__, result))
@@ -39,15 +42,16 @@ class PlatformClassicalRunner:
         algorithm = self.algorithm_class(**self.algorithm_kwargs)
         communities = list(algorithm.detect_community(g))
 
+        network_name = os.path.basename(source).split('.')[0]
         metrics_result = self._compute_metrics(g, communities)
-        self.metrics.append([g.graph[GraphsConstants.LABEL], metrics_result])
+        self.metrics.append([network_name, metrics_result])
 
         GraphUtils.set_communities_labels(g, communities)
         m = FoliumBuilder.build_folium_map(g, zoom_level=2.5)
         FoliumUtils.add_nodes_to_map(m, g)
         FoliumUtils.add_edges_to_map(m, g)
 
-        filename = f'{os.path.join(target, os.path.basename(source).split(".")[0])}.html'
+        filename = f'{os.path.join(target, network_name)}.html'
         FoliumPlot.open_map_with_browser(
             m, filename=filename, open_browser=False)
 
