@@ -1,5 +1,7 @@
 import os
 
+from networkx import NetworkXError
+
 from common.constants.graphs_constants import GraphsConstants
 from common.log import logger
 from common.loader.gml_loader import GMLLoader
@@ -72,4 +74,7 @@ class PlatformClassicalRunner:
 
         self.create_path(self.target_path)
         for path in path_names:
-            self._apply_algorithm_compute_metric_and_generate_map(source=path, target=self.target_path)
+            try:
+                self._apply_algorithm_compute_metric_and_generate_map(source=path, target=self.target_path)
+            except NetworkXError as e:
+                self.logger.error(str(e))
