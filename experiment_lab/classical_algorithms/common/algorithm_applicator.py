@@ -25,9 +25,12 @@ class PlatformClassicalRunner:
         self.metrics = list()
 
     def _compute_metrics(self, graph, communities):
+        # results = [
+        #     (GraphsConstants.RESILIENCE_ONE_LINK, graph.graph.get(GraphsConstants.RESILIENCE_ONE_LINK, '---')),
+        #     (GraphsConstants.RESILIENCE_TWO_LINK, graph.graph.get(GraphsConstants.RESILIENCE_TWO_LINK, '---'))
+        # ]
         results = [
-            (GraphsConstants.RESILIENCE_ONE_LINK, graph.graph.get(GraphsConstants.RESILIENCE_ONE_LINK, '---')),
-            (GraphsConstants.RESILIENCE_TWO_LINK, graph.graph.get(GraphsConstants.RESILIENCE_TWO_LINK, '---'))
+            (GraphsConstants.EON_BLOCKING_PROBABILITY, graph.graph.get(GraphsConstants.EON_BLOCKING_PROBABILITY, '---'))
         ]
         for metric_class in self.metric_classes:
             result = metric_class.compute(graph, communities)

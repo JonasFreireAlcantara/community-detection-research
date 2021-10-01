@@ -22,7 +22,7 @@ if __name__ == '__main__':
     classical_runner = PlatformClassicalRunner(source, target, GreedyModularityOptimizationAlgorithm, metrics)
     classical_runner.run()
     classical_runner.save_metric()
-    
+
     time.sleep(10)
 
     # Label Propagation
@@ -40,7 +40,7 @@ if __name__ == '__main__':
     classical_runner.run()
     classical_runner.save_metric()
 
-    time.sleep(10)
+    # time.sleep(10)
 
     # Fluid Communities k-4
     target = os.path.join('/home/jonas/Desktop/jonas_si_gml_fluid_communities_k_4')

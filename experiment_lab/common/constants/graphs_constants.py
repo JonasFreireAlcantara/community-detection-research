@@ -10,3 +10,4 @@ class GraphsConstants:
     NETWORK = 'Network'
     RESILIENCE_ONE_LINK = 'resilienceOneLink'
     RESILIENCE_TWO_LINK = 'resilienceTwoLink'
+    EON_BLOCKING_PROBABILITY = 'eonBlockingProbability'

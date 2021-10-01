@@ -13,3 +13,6 @@ class ResourcesConstants:
     ARNES = os.path.join(RESILIENCE_PATH, 'simton_arnes')
     ARNES_GML = os.path.join(ARNES, 'arnes_gml')
     ARNES_RESILIENCE = os.path.join(ARNES, 'arnes_resilience')
+
+    EON_BP_PATH = os.path.join(PATH, 'eon_bp')
+    ARNES_EON_BP = os.path.join(EON_BP_PATH, 'arnes_eon_bp')
