@@ -200,6 +200,7 @@ plot(
 plot(
     x=df$resilienceTwoLink,
     y=df$PerformanceMetric,
+    ylim=c(0.5, 0.9),
     main='Fluid Communities k=4 - Resilience two link vs Performance'
 )
 
@@ -287,3 +288,4 @@ plot(
     y=df$PerformanceMetric,
     main='Fluid Communities k=6 - Resilience two link vs Performance'
 )
+
