@@ -1,40 +1,47 @@
 setwd('/home/jonas/Desktop/round_3/')
 
+plot_graph <- function (xlab, ylab, x, y, filename) {
+    png(file=filename, width=990, height=819)
+    plot(
+        x=x,
+        y=y,
+        xlab='',
+        ylab=''
+    )
+    title(ylab=ylab, line=2, cex.lab=3)
+    title(xlab=xlab, line=4, cex.lab=3)
+    dev.off()
+}
+
 ######### LPA
 metrics_file <- 'jonas_si_gml_lpa/metrics_results.csv'
 
 df <- read.csv(metrics_file)
 
 # Modularity
-png(file='images/lpa_modularidade_bp.png', width=990, height=819)
-plot(
-    x=df$eonBlockingProbability,
-    y=df$ModularityMetric,
+plot_graph(
     xlab='Probabilidade de Bloqueio',
     ylab='Modularidade',
-    main='Probabilidade de Bloqueio'
+    x=df$eonBlockingProbability,
+    y=df$ModularityMetric,
+    filename='images/lpa_modularidade_bp.png'
 )
-dev.off()
 # Coverage
-png(file='images/lpa_coverage_bp.png', width=990, height=819)
-plot(
+plot_graph(
     x=df$eonBlockingProbability,
     y=df$CoverageMetric,
     xlab='Probabilidade de Bloqueio',
     ylab='Cobertura',
-    main='Probabilidade de Bloqueio'
+    filename='images/lpa_coverage_bp.png'
 )
-dev.off()
 # Performance
-png(file='images/lpa_performance_bp.png', width=990, height=819)
-plot(
+plot_graph(
     x=df$eonBlockingProbability,
     y=df$PerformanceMetric,
     xlab='Probabilidade de Bloqueio',
     ylab='Performance',
-    main='Probabilidade de Bloqueio'
+    filename='images/lpa_performance_bp.png'
 )
-dev.off()
 
 
 ############# Greedy Modularity Optimization
@@ -43,43 +50,41 @@ metrics_file <- 'jonas_si_gml_greedy_modularity/metrics_results.csv'
 df <- read.csv(metrics_file)
 
 # Modularity
-png(file='images/gmo_modularidade_bp.png', width=990, height=819)
-plot(
-    x=df$eonBlockingProbability,
-    y=df$ModularityMetric,
+plot_graph(
     xlab='Probabilidade de Bloqueio',
     ylab='Modularidade',
-    main='Probabilidade de Bloqueio'
-)
-dev.off()
-plot(
     x=df$eonBlockingProbability,
     y=df$ModularityMetric,
-    xlab='Probabilidade de Bloqueio',
-    ylab='Modularidade',
-    main='Probabilidade de Bloqueio'
+    filename='images/gmo_modularidade_bp.png'
 )
-lines(c(0.03,0.58), c(0.1,0.45), type='l', lwd=4, col='firebrick1')
-lines(c(0.015,0.5), c(0.13,0.59), type='l', lwd=4, col='firebrick1')
 # Coverage
-png(file='images/gmo_coverage_bp.png', width=990, height=819)
-plot(
+plot_graph(
     x=df$eonBlockingProbability,
     y=df$CoverageMetric,
     xlab='Probabilidade de Bloqueio',
     ylab='Cobertura',
-    main='Probabilidade de Bloqueio'
+    filename='images/gmo_coverage_bp.png'
 )
-dev.off()
 # Performance
-png(file='images/gmo_performance_bp.png', width=990, height=819)
-plot(
+plot_graph(
     x=df$eonBlockingProbability,
     y=df$PerformanceMetric,
     xlab='Probabilidade de Bloqueio',
     ylab='Performance',
-    main='Probabilidade de Bloqueio'
+    filename='images/gmo_performance_bp.png'
 )
+#Dispersion Lines
+png(file='images/gmo_modularidade_bp_dispersion_lines.png', width=990, height=819)
+plot(
+    x=df$eonBlockingProbability,
+    y=df$ModularityMetric,
+    xlab='',
+    ylab=''
+)
+title(ylab='Modularidade', line=2, cex.lab=1.8)
+title(xlab='Probabilidade de Bloqueio', line=2.5, cex.lab=1.8)
+lines(c(0.03,0.58), c(0.1,0.45), type='l', lwd=4, col='firebrick1')
+lines(c(0.015,0.5), c(0.13,0.59), type='l', lwd=4, col='firebrick1')
 dev.off()
 
 
@@ -90,35 +95,29 @@ metrics_file <- 'jonas_si_gml_fluid_communities_k_2/metrics_results.csv'
 df <- read.csv(metrics_file)
 
 # Modularity
-png(file='images/fc2_modularidade_bp.png', width=990, height=819)
-plot(
-    x=df$eonBlockingProbability,
-    y=df$ModularityMetric,
+plot_graph(
     xlab='Probabilidade de Bloqueio',
     ylab='Modularidade',
-    main='Probabilidade de Bloqueio'
+    x=df$eonBlockingProbability,
+    y=df$ModularityMetric,
+    filename='images/fc2_modularidade_bp.png'
 )
-dev.off()
 # Coverage
-png(file='images/fc2_coverage_bp.png', width=990, height=819)
-plot(
+plot_graph(
     x=df$eonBlockingProbability,
     y=df$CoverageMetric,
     xlab='Probabilidade de Bloqueio',
     ylab='Cobertura',
-    main='Probabilidade de Bloqueio'
+    filename='images/fc2_coverage_bp.png'
 )
-dev.off()
 # Performance
-png(file='images/fc2_performance_bp.png', width=990, height=819)
-plot(
+plot_graph(
     x=df$eonBlockingProbability,
     y=df$PerformanceMetric,
     xlab='Probabilidade de Bloqueio',
     ylab='Performance',
-    main='Probabilidade de Bloqueio'
+    filename='images/fc2_performance_bp.png'
 )
-dev.off()
 
 
 
@@ -129,35 +128,29 @@ metrics_file <- 'jonas_si_gml_fluid_communities_k_3/metrics_results.csv'
 df <- read.csv(metrics_file)
 
 # Modularity
-png(file='images/fc3_modularidade_bp.png', width=990, height=819)
-plot(
-    x=df$eonBlockingProbability,
-    y=df$ModularityMetric,
+plot_graph(
     xlab='Probabilidade de Bloqueio',
     ylab='Modularidade',
-    main='Probabilidade de Bloqueio'
+    x=df$eonBlockingProbability,
+    y=df$ModularityMetric,
+    filename='images/fc3_modularidade_bp.png'
 )
-dev.off()
 # Coverage
-png(file='images/fc3_coverage_bp.png', width=990, height=819)
-plot(
+plot_graph(
     x=df$eonBlockingProbability,
     y=df$CoverageMetric,
     xlab='Probabilidade de Bloqueio',
     ylab='Cobertura',
-    main='Probabilidade de Bloqueio'
+    filename='images/fc3_coverage_bp.png'
 )
-dev.off()
 # Performance
-png(file='images/fc3_performance_bp.png', width=990, height=819)
-plot(
+plot_graph(
     x=df$eonBlockingProbability,
     y=df$PerformanceMetric,
     xlab='Probabilidade de Bloqueio',
     ylab='Performance',
-    main='Probabilidade de Bloqueio'
+    filename='images/fc3_performance_bp.png'
 )
-dev.off()
 
 
 
@@ -168,35 +161,29 @@ metrics_file <- 'jonas_si_gml_fluid_communities_k_4/metrics_results.csv'
 df <- read.csv(metrics_file)
 
 # Modularity
-png(file='images/fc4_modularidade_bp.png', width=990, height=819)
-plot(
-    x=df$eonBlockingProbability,
-    y=df$ModularityMetric,
+plot_graph(
     xlab='Probabilidade de Bloqueio',
     ylab='Modularidade',
-    main='Probabilidade de Bloqueio'
+    x=df$eonBlockingProbability,
+    y=df$ModularityMetric,
+    filename='images/fc4_modularidade_bp.png'
 )
-dev.off()
 # Coverage
-png(file='images/fc4_coverage_bp.png', width=990, height=819)
-plot(
+plot_graph(
     x=df$eonBlockingProbability,
     y=df$CoverageMetric,
     xlab='Probabilidade de Bloqueio',
     ylab='Cobertura',
-    main='Probabilidade de Bloqueio'
+    filename='images/fc4_coverage_bp.png'
 )
-dev.off()
 # Performance
-png(file='images/fc4_performance_bp.png', width=990, height=819)
-plot(
+plot_graph(
     x=df$eonBlockingProbability,
     y=df$PerformanceMetric,
     xlab='Probabilidade de Bloqueio',
     ylab='Performance',
-    main='Probabilidade de Bloqueio'
+    filename='images/fc4_performance_bp.png'
 )
-dev.off()
 
 
 
@@ -207,35 +194,29 @@ metrics_file <- 'jonas_si_gml_fluid_communities_k_5/metrics_results.csv'
 df <- read.csv(metrics_file)
 
 # Modularity
-png(file='images/fc5_modularidade_bp.png', width=990, height=819)
-plot(
-    x=df$eonBlockingProbability,
-    y=df$ModularityMetric,
+plot_graph(
     xlab='Probabilidade de Bloqueio',
     ylab='Modularidade',
-    main='Probabilidade de Bloqueio'
+    x=df$eonBlockingProbability,
+    y=df$ModularityMetric,
+    filename='images/fc5_modularidade_bp.png'
 )
-dev.off()
 # Coverage
-png(file='images/fc5_coverage_bp.png', width=990, height=819)
-plot(
+plot_graph(
     x=df$eonBlockingProbability,
     y=df$CoverageMetric,
     xlab='Probabilidade de Bloqueio',
     ylab='Cobertura',
-    main='Probabilidade de Bloqueio'
+    filename='images/fc5_coverage_bp.png'
 )
-dev.off()
 # Performance
-png(file='images/fc5_performance_bp.png', width=990, height=819)
-plot(
+plot_graph(
     x=df$eonBlockingProbability,
     y=df$PerformanceMetric,
     xlab='Probabilidade de Bloqueio',
     ylab='Performance',
-    main='Probabilidade de Bloqueio'
+    filename='images/fc5_performance_bp.png'
 )
-dev.off()
 
 
 
@@ -245,32 +226,78 @@ metrics_file <- 'jonas_si_gml_fluid_communities_k_6/metrics_results.csv'
 df <- read.csv(metrics_file)
 
 # Modularity
-png(file='images/fc6_modularidade_bp.png', width=990, height=819)
-plot(
-    x=df$eonBlockingProbability,
-    y=df$ModularityMetric,
+plot_graph(
     xlab='Probabilidade de Bloqueio',
     ylab='Modularidade',
-    main='Probabilidade de Bloqueio'
+    x=df$eonBlockingProbability,
+    y=df$ModularityMetric,
+    filename='images/fc6_modularidade_bp.png'
 )
-dev.off()
 # Coverage
-png(file='images/fc6_coverage_bp.png', width=990, height=819)
-plot(
+plot_graph(
     x=df$eonBlockingProbability,
     y=df$CoverageMetric,
     xlab='Probabilidade de Bloqueio',
     ylab='Cobertura',
-    main='Probabilidade de Bloqueio'
+    filename='images/fc6_coverage_bp.png'
 )
-dev.off()
 # Performance
-png(file='images/fc6_performance_bp.png', width=990, height=819)
-plot(
+plot_graph(
     x=df$eonBlockingProbability,
     y=df$PerformanceMetric,
     xlab='Probabilidade de Bloqueio',
     ylab='Performance',
-    main='Probabilidade de Bloqueio'
+    filename='images/fc6_performance_bp.png'
 )
+
+
+##############################
+# Greedy Modularity Optimization computing time comparison
+metrics_file <- 'jonas_si_gml_greedy_modularity_computing_time/metrics_results.csv'
+
+df <- read.csv(metrics_file)
+df <- df[1:1500,]
+df <- df[order(df$simulationTimeMS),]
+
+# Modularity
+png(file='images/gmo_simulation_time_bp.png', width=990, height=819)
+plot(
+    x=1:length(df$simulationTimeMS),
+    y=df$simulationTimeMS/60000,
+    ylim=c(6,14.3),
+    xlab='', ylab='',
+    cex.axis=1.3,
+    type='l',
+    lwd=2,
+    col='black'
+)
+title(ylab='Minutos', line=2, cex.lab=2.3)
+title(xlab='Topologia', line=2, cex.lab=2.3)
 dev.off()
+
+png(file='images/gmo_computing_time_bp.png', width=990, height=819)
+plot(
+    x=1:length(df$computingTimeMS),
+    y=df$computingTimeMS,
+    xlab='', ylab='',
+    cex.axis=1.3,
+    type='l',
+    lwd=2,
+    col='black'
+)
+title(ylab='Milissegundos', line=2, cex.lab=2.3)
+title(xlab='Topologia', line=2, cex.lab=2.3)
+dev.off()
+
+# Computing average
+simulation_average_ms <- floor(mean(df$simulationTimeMS))
+summary(df$simulationTimeMS)
+
+computing_average_ms <- ceiling(mean(df$computingTimeMS))
+summary(df$computingTimeMS)
+
+speedup <- floor(simulation_average_ms / computing_average_ms)
+
+
+
+

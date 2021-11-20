@@ -30,7 +30,8 @@ class PlatformClassicalRunner:
         #     (GraphsConstants.RESILIENCE_TWO_LINK, graph.graph.get(GraphsConstants.RESILIENCE_TWO_LINK, '---'))
         # ]
         results = [
-            (GraphsConstants.EON_BLOCKING_PROBABILITY, graph.graph.get(GraphsConstants.EON_BLOCKING_PROBABILITY, '---'))
+            (GraphsConstants.EON_BP, graph.graph.get(GraphsConstants.EON_BP, '---')),
+            (GraphsConstants.SIMULATION_TIME_MS, graph.graph.get(GraphsConstants.SIMULATION_TIME_MS, '---'))
         ]
         for metric_class in self.metric_classes:
             result = metric_class.compute(graph, communities)
@@ -49,6 +50,7 @@ class PlatformClassicalRunner:
 
         network_name = os.path.basename(source).split('.')[0]
         metrics_result = self._compute_metrics(g, communities)
+        metrics_result.append((GraphsConstants.COMPUTING_TIME_MS, algorithm.computing_time_ms))
         self.metrics.append([network_name, metrics_result])
 
         GraphUtils.set_communities_labels(g, communities)

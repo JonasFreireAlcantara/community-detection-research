@@ -12,6 +12,7 @@ class JonasSIEONBlockingProbabilityLoader(Loader):
 
     UPPER_TRIANGULAR_POSITION = 15
     BLOCKING_PROBABILITY = 35
+    COMPUTING_TIME = 36
 
     def __init__(self, gml_path, line):
         super().__init__(gml_path)
@@ -53,6 +54,7 @@ class JonasSIEONBlockingProbabilityLoader(Loader):
         graph = read_gml(self.object_ready_to_be_parsed, label='id')
         graph = create_empty_copy(graph)
         graph = self._get_blocking_probability_and_add_to_graph(graph)
+        graph = self._get_simulation_time_and_add_to_graph(graph)
 
         adjacency_matrix = self.create_adjacency_matrix()
         nodes_number = len(adjacency_matrix)
@@ -65,5 +67,10 @@ class JonasSIEONBlockingProbabilityLoader(Loader):
 
     def _get_blocking_probability_and_add_to_graph(self, graph):
         eon_bp = self.line.split(';')[JonasSIEONBlockingProbabilityLoader.BLOCKING_PROBABILITY]
-        graph.graph[GraphsConstants.EON_BLOCKING_PROBABILITY] = eon_bp
+        graph.graph[GraphsConstants.EON_BP] = eon_bp
+        return graph
+
+    def _get_simulation_time_and_add_to_graph(self, graph):
+        simulation_time_sec = self.line.split(';')[JonasSIEONBlockingProbabilityLoader.COMPUTING_TIME]
+        graph.graph[GraphsConstants.SIMULATION_TIME_MS] = float(simulation_time_sec) * 1000
         return graph
