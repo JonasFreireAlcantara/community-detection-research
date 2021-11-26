@@ -34,8 +34,9 @@ class PlatformClassicalRunner:
             (GraphsConstants.SIMULATION_TIME_MS, graph.graph.get(GraphsConstants.SIMULATION_TIME_MS, '---'))
         ]
         for metric_class in self.metric_classes:
-            result = metric_class.compute(graph, communities)
-            results.append((metric_class.__name__, result))
+            execution_time_ms, metric_result = metric_class().compute_metric_and_execution_time(graph, communities)
+            results.append((metric_class.__name__, metric_result))
+            results.append((f'{metric_class.__name__}TimeMS', execution_time_ms))
         return results
 
     def _apply_algorithm_compute_metric_and_generate_map(self, source, target):
