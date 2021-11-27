@@ -4,16 +4,16 @@ setwd('/home/jonas/Desktop/round_2/')
 
 plot_graph <- function (xlab, ylab, x, y, filename) {
     png(file=filename, width=990, height=819)
-    par(mar=c(7,7,2,2)+0.1)
+    par(mar=c(9,10,2,2)+0.1)
     plot(
         x=x,
         y=y,
         xlab='',
         ylab='',
-        cex.axis=3
+        cex.axis=5
     )
-    title(ylab=ylab, line=5, cex.lab=3)
-    title(xlab=xlab, line=5, cex.lab=3)
+    title(ylab=ylab, line=7, cex.lab=5)
+    title(xlab=xlab, line=7, cex.lab=5)
     dev.off()
 }
 
